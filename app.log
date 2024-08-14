@@ -1,0 +1,12 @@
+2024-08-14 14:55:38,212 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-14 14:55:38,212 - INFO - [33mPress CTRL+C to quit[0m
+2024-08-14 14:55:38,217 - INFO -  * Restarting with stat
+2024-08-14 14:55:38,499 - WARNING -  * Debugger is active!
+2024-08-14 14:55:38,500 - INFO -  * Debugger PIN: 287-813-673
+2024-08-14 14:57:50,230 - INFO - 127.0.0.1 - - [14/Aug/2024 14:57:50] "GET / HTTP/1.1" 200 -
+2024-08-14 14:57:56,679 - INFO - 127.0.0.1 - - [14/Aug/2024 14:57:56] "GET / HTTP/1.1" 200 -
+2024-08-14 14:58:53,835 - INFO -  * Detected change in '/home/baloyi/Documents/work18/l_m_s/app.py', reloading
+2024-08-14 14:58:53,907 - INFO -  * Restarting with stat
+2024-08-14 14:58:54,294 - WARNING -  * Debugger is active!
+2024-08-14 14:58:54,295 - INFO -  * Debugger PIN: 287-813-673
