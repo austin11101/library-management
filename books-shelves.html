@@ -5,23 +5,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Shelves</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="books-shelves.js"></script>
+    <style>
+        /* General Styles */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        
+        .wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            height: 20vh; /* 20% of the viewport height */
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        section {
+            flex: 1; /* Takes up remaining space */
+            background-color: grey;
+            background-image: url("images/library.jpg");
+            background-size: cover; /* Ensures the image covers the entire section */
+            background-position: center;
+            background-attachment: fixed; /* Keeps the background fixed while scrolling */
+        }
+        
+        footer {
+            height: 10vh; /* 10% of the viewport height */
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Header Styles */
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+        
+        .logo img {
+            height: 60px; /* Adjust as needed */
+        }
+        
+        nav {
+            margin-right: 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        
+        nav li {
+            margin: 0 10px;
+        }
+        
+        /* Section Styles */
+        
+        .section_image {
+            padding: 20px;
+            background-size: cover; /* Ensures the image covers the entire section */
+            background-position: center;
+        }
+        
+        .box {
+            background-color: rgba(92, 87, 87, 0.6); /* Semi-transparent background */
+            color: white;
+            padding: 20px;
+            border-radius: 8px; /* Optional: for rounded corners */
+            text-align: center;
+        }
+        
+        /* Books-Shelves Styles */
+        
+        #search-form input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            width: 300px;
+        }
+        
+        #search-form button {
+            padding: 8px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        #search-form button:hover {
+            background-color: #0056b3;
+        }
+        
+        .book {
+            display: inline-block;
+            margin: 10px;
+            text-align: left;
+        }
+        
+        .book img {
+            max-width: 128px;
+            max-height: 192px;
+        }
+        
+        .book h3 {
+            margin: 10px 0 5px;
+        }
+        
+        .book p {
+            margin: 0;
+        }
+        
+        /* About Us Page Styles */
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+        }
+        
+        .about-container h1, .about-container h2 {
+            color: #333;
+        }
+        
+        .about-container p, .about-container ul {
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .about-container ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        
+        .about-container ul li {
+            margin-bottom: 10px;
+        }
+        
+        .book, .selected-book, .chart-item {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+        .book img, .selected-book img, .chart-item img {
+            max-width: 128px;
+            max-height: 192px;
+        }
+        
+        #chart {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        #selected-books {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
         <header>
             <div class="logo">
-                <img src="images/books1.jpg" alt="Image of books on a shelf">
                 <h2 style="color: white;">Online Library Management System</h2>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="books-shelves.html">Books-Shelves</a></li>
-                    <li><a href="Student-Login.html">Student Login</a></li>
-                    <li><a href="registration.html">Register</a></li>
-                    <li><a href="feedback.html">Feedback</a></li>
+            <nav style="margin-right: 20px;">
+                <ul style="display: flex; list-style: none; padding: 0;">
+                    <li style="margin: 0 10px;"><a href="{{ url_for('index') }}" style="color: white; text-decoration: none;">Home</a></li>
+                    <li style="margin: 0 10px;"><a href="{{ url_for('about') }}" style="color: white; text-decoration: none;">About</a></li>
+                    <li style="margin: 0 10px;"><a href="{{ url_for('student_login') }}" style="color: white; text-decoration: none;">Student Login</a></li>
+                    <li style="margin: 0 10px;"><a href="{{ url_for('register') }}" style="color: white; text-decoration: none;">Register</a></li>
+                    <li style="margin: 0 10px;"><a href="#" style="color: white; text-decoration: none;">Feedback</a></li>
                 </ul>
             </nav>
         </header>
@@ -37,6 +209,16 @@
                 </div>
             </div>
         </section>
+        <section>
+            <div class="box">
+                <h2 style="text-align: center; font-size: 30px;">Selected Books</h2>
+                <div id="selected-books" style="text-align: center;"></div>
+                <button id="view-chart" style="display: block; margin: 20px auto;">View Chart</button>
+                <div id="chart" style="text-align: center; display: none;">
+                    <!-- Chart will be displayed here -->
+                </div>
+            </div>
+        </section>
         <footer>
             <p style="color: white; text-align: center;">
                 Email: <a href="mailto:austinbal28@gmail.com">austinbal28@gmail.com</a><br>
@@ -44,5 +226,92 @@
             </p>
         </footer>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('search-form');
+            const queryInput = document.getElementById('query');
+            const resultsDiv = document.getElementById('results');
+            const selectedBooksDiv = document.getElementById('selected-books');
+            const viewChartButton = document.getElementById('view-chart');
+            const chartDiv = document.getElementById('chart');
+            
+            let selectedBooks = [];
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent form submission
+                
+                const query = queryInput.value;
+                const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`;
+
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    // Clear previous results
+                    resultsDiv.innerHTML = '';
+
+                    if (data.items) {
+                        data.items.forEach(item => {
+                            const title = item.volumeInfo.title || 'No title';
+                            const authors = item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown author';
+                            const thumbnail = item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : 'https://via.placeholder.com/128x192?text=No+Image';
+                            
+                            // Create a book element
+                            const bookElement = document.createElement('div');
+                            bookElement.classList.add('book');
+                            bookElement.innerHTML = `
+                                <img src="${thumbnail}" alt="Book cover">
+                                <h3>${title}</h3>
+                                <p><strong>Author(s):</strong> ${authors}</p>
+                                <button class="select-btn">Select</button>
+                            `;
+
+                            // Add event listener to select button
+                            bookElement.querySelector('.select-btn').addEventListener('click', () => {
+                                if (!selectedBooks.some(book => book.title === title)) {
+                                    selectedBooks.push({ title, authors, thumbnail });
+                                    updateSelectedBooks();
+                                }
+                            });
+
+                            resultsDiv.appendChild(bookElement);
+                        });
+                    } else {
+                        resultsDiv.innerHTML = '<p>No books found.</p>';
+                    }
+                } catch (error) {
+                    resultsDiv.innerHTML = '<p>Error fetching book data.</p>';
+                    console.error('Error:', error);
+                }
+            });
+
+            function updateSelectedBooks() {
+                selectedBooksDiv.innerHTML = '';
+                selectedBooks.forEach(book => {
+                    selectedBooksDiv.innerHTML += `
+                        <div class="selected-book">
+                            <img src="${book.thumbnail}" alt="Book cover">
+                            <h3>${book.title}</h3>
+                            <p><strong>Author(s):</strong> ${book.authors}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            viewChartButton.addEventListener('click', () => {
+                chartDiv.innerHTML = '';
+                selectedBooks.forEach(book => {
+                    chartDiv.innerHTML += `
+                        <div class="chart-item">
+                            <img src="${book.thumbnail}" alt="Book cover">
+                            <h3>${book.title}</h3>
+                            <p><strong>Author(s):</strong> ${book.authors}</p>
+                        </div>
+                    `;
+                });
+                chartDiv.style.display = 'block';
+            });
+        });
+    </script>
 </body>
 </html>
