@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Online Library System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>/* General Styles */
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        
+        .wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            height: 20vh; /* 20% of the viewport height */
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        section {
+            flex: 1; /* Takes up remaining space */
+            background-color: grey;
+            background-image: url("images/library.jpg");
+            background-size: cover; /* Ensures the image covers the entire section */
+            background-position: center;
+            background-attachment: fixed; /* Keeps the background fixed while scrolling */
+        }
+        
+        footer {
+            height: 10vh; /* 10% of the viewport height */
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Header Styles */
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+        
+        .logo img {
+            height: 60px; /* Adjust as needed */
+        }
+        
+        nav {
+            margin-right: 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        
+        nav li {
+            margin: 0 10px;
+        }
+        
+        /* Section Styles */
+        
+        .section_image {
+            padding: 20px;
+            background-size: cover; /* Ensures the image covers the entire section */
+            background-position: center;
+        }
+        
+        .box {
+            background-color: rgba(92, 87, 87, 0.6); /* Semi-transparent background */
+            color: white;
+            padding: 20px;
+            border-radius: 8px; /* Optional: for rounded corners */
+            text-align: center;
+        }
+        
+        /* Books-Shelves Styles */
+        
+        #search-form input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            width: 300px;
+        }
+        
+        #search-form button {
+            padding: 8px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        #search-form button:hover {
+            background-color: #0056b3;
+        }
+        
+        .book {
+            display: inline-block;
+            margin: 10px;
+            text-align: left;
+        }
+        
+        .book img {
+            max-width: 128px;
+            max-height: 192px;
+        }
+        
+        .book h3 {
+            margin: 10px 0 5px;
+        }
+        
+        .book p {
+            margin: 0;
+        }
+        
+        /* About Us Page Styles */
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+        }
+        
+        .about-container h1, .about-container h2 {
+            color: #333;
+        }
+        
+        .about-container p, .about-container ul {
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .about-container ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        
+        .about-container ul li {
+            margin-bottom: 10px;
+        }
+        
+        
+        
+        .book, .selected-book, .chart-item {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+        .book img, .selected-book img, .chart-item img {
+            max-width: 128px;
+            max-height: 192px;
+        }
+        
+        #chart {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        #selected-books {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="logo">
+    
+                <h2 style="color: white;">Online Library Management System</h2>
+            </div>
+            <nav>
+                <nav style="margin-right: 20px;">
+                    <ul style="display: flex; list-style: none; padding: 0;">
+                        <li style="margin: 0 10px;"><a href="{{ url_for('index') }}" style="color: white; text-decoration: none;">Home</a></li>
+                        <li style="margin: 0 10px;"><a href="{{ url_for('books_shelves') }}" style="color: white; text-decoration: none;">Books-Shelves</a></li>
+                        <li style="margin: 0 10px;"><a href="{{ url_for('student_login') }}" style="color: white; text-decoration: none;">Student Login</a></li>
+                        <li style="margin: 0 10px;"><a href="{{ url_for('register') }}" style="color: white; text-decoration: none;">Register</a></li>
+                        <li style="margin: 0 10px;"><a href="#" style="color: white; text-decoration: none;">Feedback</a></li>
+                    </ul>
+                </nav>
+        </header>
+        <section>
+            <div class="about-container">
+                <h1>About Us</h1>
+                <p>Welcome to our Online Library System. Established in 1992, our library has been a cornerstone of our community for over three decades. We are dedicated to providing access to a wide range of books and resources to support learning, research, and personal growth.</p>
+                
+                <h2>Our History</h2>
+                <p>Founded in 1992, our library began as a small collection of books and a few dedicated staff members. Over the years, we have grown significantly, expanding our collection and services to meet the evolving needs of our patrons. Our mission has always been to promote literacy and learning, and we are proud to continue this tradition today.</p>
+                
+                <h2>Our Mission</h2>
+                <p>Our mission is to enhance the quality of life in our community by providing access to information and resources. We aim to foster a love of reading and learning through our diverse collection of books, e-books, and other media. We are committed to creating an inclusive and welcoming environment for everyone.</p>
+                
+                <h2>Services We Offer</h2>
+                <ul>
+                    <li><strong>Book Lending:</strong> Access to a wide range of books, including fiction, non-fiction, and reference materials.</li>
+                    <li><strong>Digital Resources:</strong> E-books and audiobooks available for download.</li>
+                    <li><strong>Research Assistance:</strong> Help with research projects and finding resources.</li>
+                    <li><strong>Community Programs:</strong> Workshops, reading events, and educational programs for all ages.</li>
+                    <li><strong>Study Spaces:</strong> Quiet areas for reading and studying.</li>
+                </ul>
+
+                <h2>Our Team</h2>
+                <p>Our dedicated team of librarians and staff are here to assist you. With years of experience and a passion for books and learning, we are committed to providing excellent service and support. Feel free to reach out to us for any assistance or inquiries.</p>
+
+                <h2>Contact Us</h2>
+                <p>If you have any questions or need further information, please don't hesitate to get in touch with us. You can reach us via email at <a href="mailto:austinbal28@gmail.com">austinbal28@gmail.com</a> or by phone at +27658846***.</p>
+            </div>
+        </section>
+        <footer>
+            <p style="color: white; text-align: center;">
+                Email: <a href="mailto:austinbal28@gmail.com">austinbal28@gmail.com</a><br>
+                Mobile: +27658846***
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
+
+
